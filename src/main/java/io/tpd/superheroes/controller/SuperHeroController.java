@@ -1,5 +1,6 @@
 package io.tpd.superheroes.controller;
 
+import io.tpd.superheroes.config.Loggable;
 import io.tpd.superheroes.domain.SuperHero;
 import io.tpd.superheroes.repository.SuperHeroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/superheroes")
-public final class SuperHeroController {
+public  class SuperHeroController {
 
     private final SuperHeroRepository superHeroRepository;
 
@@ -20,6 +21,7 @@ public final class SuperHeroController {
     }
 
     @GetMapping("/{id}")
+    @Loggable
     public SuperHero getSuperHeroById(@PathVariable int id) {
         return superHeroRepository.getSuperHero(id);
     }
