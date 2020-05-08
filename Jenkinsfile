@@ -1,3 +1,4 @@
+md5sum= ''
 pipeline {
     agent any
      
