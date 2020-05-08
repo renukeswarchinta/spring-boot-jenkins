@@ -2,12 +2,9 @@ pipeline {
     agent any
      
     stages {
-        stage('Deploy') {
-           steps {
-               
-                dir('spring-boot-jenkins') {
-                   bat "mvn clean package"
-                }
+         stage{
+            script{
+                md5sum = powershell(returnStdout: true, script: "(Get-FileHash -Algorithm MD5 -Path  \".\\Jenkinsfile\" | Select -ExpandProperty Hash  )")
             }
         }
     }
