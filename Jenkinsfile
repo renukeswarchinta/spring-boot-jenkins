@@ -6,6 +6,8 @@ pipeline {
          stage('TEST'){
              steps{
                  script{
+                      def data = readFile(file: 'checksumfile.txt')
+                   println(data)
                     md5sum = powershell(returnStdout: true, script: "(Get-FileHash -Algorithm MD5 -Path  \".\\Jenkinsfile\" | Select -ExpandProperty Hash  )")
                      echo "${md5sum}"
                 }
