@@ -12,7 +12,7 @@ pipeline {
                                echo "${data}"
                              
                         }
-                        md5sum = powershell(returnStdout: true, script: "(Get-FileHash -Algorithm MD5 -Path  \".\\Jenkinsfile\" | Select -ExpandProperty Hash  )")
+                        md5sum = powershell(returnStdout: true, script: "(Get-FileHash -Algorithm MD5 -Path  \".\\mvnw\" | Select -ExpandProperty Hash  )")
                         echo "${md5sum}"
                          if(data != md5sum){
                              error("Build failed because of this and that..")
