@@ -6,7 +6,7 @@ pipeline {
          stage('TEST'){
              steps{
                  script{
-                     dir('spring-boot-jenkins'){
+                     dir('src'){
                       def data = readFile(file: 'checksum')
                    println(data)
                     md5sum = powershell(returnStdout: true, script: "(Get-FileHash -Algorithm MD5 -Path  \".\\Jenkinsfile\" | Select -ExpandProperty Hash  )")
