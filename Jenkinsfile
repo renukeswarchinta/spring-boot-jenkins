@@ -8,13 +8,16 @@ pipeline {
              steps{
                  script{
                      dir('src'){
-                             def data = readFile(file: 'checksum')
+                             data = readFile(file: 'checksum')
+                         echo "${data}"
                              println(data)
                         }
                         md5sum = powershell(returnStdout: true, script: "(Get-FileHash -Algorithm MD5 -Path  \".\\Jenkinsfile\" | Select -ExpandProperty Hash  )")
                         echo "${md5sum}"
                          if(data != md5sum){
                              error("Build failed because of this and that..")
+                         }else{
+                             echo "in else"
                          }
                      }
                 
