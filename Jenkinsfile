@@ -1,4 +1,5 @@
 md5sum= ''
+data=''
 pipeline {
     agent any
      
@@ -12,6 +13,9 @@ pipeline {
                         }
                         md5sum = powershell(returnStdout: true, script: "(Get-FileHash -Algorithm MD5 -Path  \".\\Jenkinsfile\" | Select -ExpandProperty Hash  )")
                         echo "${md5sum}"
+                         if(data == md5sum){
+                             exit 1
+                         }
                      }
                 
              }
