@@ -1,0 +1,28 @@
+{
+  "Parameters": {
+    "ParameterA": {
+      "Type": "String",
+      "Default": "abc"
+    },
+    "ParameterB": {
+      "Type": "String",
+      "Default": "def"
+    },
+    "ParameterC": {
+      "Type": "String",
+      "Default": {
+        "Fn::Sub": "${ParameterA}-${ParameterB}"
+      }
+    }
+  },
+  "Resources": {
+    "MyS3Bucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": {
+          "Ref": "ParameterC"
+        }
+      }
+    }
+  }
+}
