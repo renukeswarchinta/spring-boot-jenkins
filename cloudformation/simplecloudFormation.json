@@ -1,28 +1,16 @@
 {
-  "Parameters": {
-    "ParameterA": {
-      "Type": "String",
-      "Default": "abc"
-    },
-    "ParameterB": {
-      "Type": "String",
-      "Default": "def"
-    },
-    "ParameterC": {
-      "Type": "String",
-      "Default": {
-        "Fn::Sub": "${ParameterA}-${ParameterB}"
-      }
-    }
-  },
-  "Resources": {
-    "MyS3Bucket": {
-      "Type": "AWS::S3::Bucket",
-      "Properties": {
-        "BucketName": {
-          "Ref": "ParameterC"
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Resources": {
+        "S3Bucket": {
+            "Type": "AWS::S3::Bucket"
         }
-      }
+    },
+    "Outputs": {
+        "BucketName": {
+            "Value": {
+                "Ref": "S3Bucket"
+            },
+            "Description": "Name of the sample Amazon S3 bucket."
+        }
     }
-  }
 }
