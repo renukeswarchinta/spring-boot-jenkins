@@ -2,7 +2,6 @@ md5sum= ''
 data=''
 pipeline {
     agent any
-     
     stages {
          stage('TEST'){
              steps{
