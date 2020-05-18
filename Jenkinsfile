@@ -16,7 +16,7 @@ pipeline {
                          if(data != md5sum){
                              error("Build failed because of this and that..")
                          }else{
-                             echo "in else"
+                             echo "in else---"
                          }
                      }
                 
