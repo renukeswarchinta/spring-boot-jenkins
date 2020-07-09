@@ -1,9 +1,14 @@
 package io.tpd.superheroes.repository;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.tpd.superheroes.domain.HeroEntity;
 import io.tpd.superheroes.domain.SuperHero;
 import io.tpd.superheroes.exceptions.NonExistingHeroException;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +22,12 @@ import java.util.Optional;
 public class SuperHeroRepositoryImpl implements SuperHeroRepository {
 
     private List<SuperHero> superHeroList;
+
+    @Autowired
+    private HeroRepository heroRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     public SuperHeroRepositoryImpl() {
         superHeroList = new ArrayList<>();
@@ -39,6 +50,14 @@ public class SuperHeroRepositoryImpl implements SuperHeroRepository {
 
     @Override
     public void saveSuperHero(SuperHero superHero) {
-        superHeroList.add(superHero);
+        HeroEntity heroEntity = modelMapper.map(superHero, HeroEntity.class);
+        heroRepository.save(heroEntity);
+
+    }
+    private HeroEntity convertToEntity(SuperHero heroDTO) throws ParseException {
+        HeroEntity post = modelMapper.map(heroDTO, HeroEntity.class);
+
+
+        return post;
     }
 }
